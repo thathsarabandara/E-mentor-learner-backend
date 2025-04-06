@@ -1,7 +1,7 @@
 import express from "express";
 import connectDB from "./config/Database";
 import dotenv from "dotenv";
-import learnerRouter from "./routes/Learner.route";
+import learnerRouter from "./routes/learner.route";
 import authRouter from "./routes/auth.route";
 
 const app = express();
