@@ -8,10 +8,24 @@ export interface IToken extends Document {
 }
 
 const TokenSchema = new Schema<IToken>({
-    token: { type:String, required: true},
-    tokenType: { type:String, required: true},
-    expriedat: { type:Date, required: true},
-    userId: { type:Schema.Types.ObjectId, ref: "User" , required: true},
+    token: { 
+        type:String, 
+        required: true
+    },
+    tokenType: { 
+        ype:String, 
+        required: true
+    },
+    expriedat: { 
+        type:Date, 
+        required: true,
+        default: new Date(Date.now() + 2 * 3600 * 1000),
+    },
+    userId: { 
+        type:Schema.Types.ObjectId, 
+        ref: "User", 
+        required: true
+    },
 },
 {timestamps: true}
 )

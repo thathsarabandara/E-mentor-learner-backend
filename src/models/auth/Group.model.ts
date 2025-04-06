@@ -12,4 +12,6 @@ const GroupSchema = new Schema<IGroup>({
     {timestamps: true}
 )
 
-export default mongoose.model<IGroup>("Group", GroupSchema)
+const Group = mongoose.model("Group", GroupSchema);
+
+export default Group;
