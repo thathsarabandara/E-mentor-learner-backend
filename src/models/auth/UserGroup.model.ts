@@ -12,4 +12,6 @@ const UserGroupSchema = new Schema<IUserGroup>({
     {timestamps: true},
 )
 
-export default mongoose.model<IUserGroup>("UserGroup", UserGroupSchema);
+const UserGroup = mongoose.model("UserGroup", UserGroupSchema)
+
+export default UserGroup;
