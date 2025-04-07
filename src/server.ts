@@ -10,7 +10,7 @@ dotenv.config();
 app.use(express.json());
 
 app.use('/auth', authRouter);
-app.use('/auth', learnerRouter);
+app.use('/learner', learnerRouter);
 
 connectDB();
 
