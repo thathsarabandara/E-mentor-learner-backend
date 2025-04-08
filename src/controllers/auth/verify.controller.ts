@@ -43,6 +43,8 @@ export const verifyOTP = async (req: Request, res: Response) =>{
             return res.status(404).json({message: 'Invalid Otp'})
         }
 
+        await User.updateOne()
+
         const authtoken = generateToken(user.email);
 
         await Token.create({
@@ -56,6 +58,14 @@ export const verifyOTP = async (req: Request, res: Response) =>{
             secure: process.env.NODE_ENV === 'production',
             sameSite: "strict"
         })
+
+        return res.cookie('authlearnerToken', authtoken ,{
+            httpOnly: true,
+            secure: process.env.NODE_ENV ==='production',
+            sameSite: 'strict',
+            maxAge: 120 * 3600 * 1000
+        });
+
     } catch (error) {
         console.error('Verification Failed', error);
         return res.status(500).json({message: 'Verfification failed!'})

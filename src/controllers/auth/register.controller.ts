@@ -45,7 +45,7 @@ export const register = async (req: Request ,res: Response): Promise<any> =>{
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: "strict",
-            maxAge: 2 * 60 * 60 * 1000
+            maxAge: 10 * 60 * 60 * 1000
         }).status(200).json({message: 'New user saved!'})
 
     } catch (error) {
