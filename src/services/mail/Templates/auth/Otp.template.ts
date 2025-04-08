@@ -1,7 +1,7 @@
 import { mailConfig } from "config/Mail.Config";
 import { transporter } from "services/mail/Mail.Service";
 
-export const sendOTPMail = async (to: string, subject: string, otp: string, username: string): Promise<void> => {
+export const sendOTPMail = async (to: string, otp: string, username: string): Promise<void> => {
   try {
     const year = new Date().getFullYear();
 
@@ -10,7 +10,7 @@ export const sendOTPMail = async (to: string, subject: string, otp: string, user
     <html>
     <head>
       <meta charset="UTF-8">
-      <title>${subject}</title>
+      <title> E-Mentor - OTP Service </title>
     </head>
     <body style="margin:0; padding:0; background-color:#f4f4f4; font-family: Arial, sans-serif;">
 
@@ -66,7 +66,7 @@ export const sendOTPMail = async (to: string, subject: string, otp: string, user
     const mailOptions = {
       from: mailConfig.from,
       to,
-      subject,
+      'E-Mentor - OTP Service',
       html,
     };
 
