@@ -1,5 +1,5 @@
-import { mailConfig } from "config/Mail.Config";
-import { transporter } from "services/mail/Mail.Service";
+import { mailConfig } from "../../../../config/Mail.Config";
+import { transporter } from "../../../../services/mail/Mail.Service";
 
 export const sendWelcomeMail = async(to: string, username: string): Promise<void> =>{
     try {
