@@ -8,6 +8,6 @@ if(!JWT_SECRET){
     console.log("Enviornment variable for JWT_ SECRET not found!")
 }
 
-export const createToken = (email: string, password: string) =>{
-    return jwt.sign({email: email, password: password}, JWT_SECRET);
+export const generateToken = (email: string) =>{
+    return jwt.sign({email: email}, JWT_SECRET);
 }
