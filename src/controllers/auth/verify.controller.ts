@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import Token from "models/auth/Token.model";
 import User from "models/auth/User.model";
+import { sendWelcomeMail } from "services/mail/Templates/auth/Welcome.template";
 import { comparePasswrod } from "utils/HashPasswrod/hash.util";
 import { compareOTP } from "utils/otp/Otp.util";
 import { generateToken } from "utils/Token/Token.util";
@@ -43,7 +44,9 @@ export const verifyOTP = async (req: Request, res: Response) =>{
             return res.status(404).json({message: 'Invalid Otp'})
         }
 
-        await User.updateOne()
+        await User.findByIdAndUpdate(user._id, {
+            isVerfied: true
+        })
 
         const authtoken = generateToken(user.email);
 
@@ -52,6 +55,8 @@ export const verifyOTP = async (req: Request, res: Response) =>{
             tokenType: 'auth',
             userId: user._id
         })
+
+        await sendWelcomeMail(user.email, user.username);
 
         res.clearCookie('temptoken',{
             httpOnly: true,
