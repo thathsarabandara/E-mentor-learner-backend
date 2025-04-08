@@ -7,23 +7,25 @@ import { storeOTP } from "../../utils/redis/redis.util";
 import { sendOTPMail } from "../../services/mail/Templates/auth/Otp.template";
 import { generateToken } from "../../utils/Token/Token.util";
 import Token from "../../models/auth/Token.model";
+import dotenv from 'dotenv'
+dotenv.config();
 
 export const register = async (req: Request ,res: Response): Promise<any> =>{
     try {
-        const {username , email , password}: RegisterCredentials = req.body;
+        const { username, email, password }: RegisterCredentials = req.body;
 
-        const isDuplicated = await User.findOne({email , isVerfied: true})
+        const isDuplicated = await User.findOne({ email, isVerfied: true });
 
-        if(isDuplicated){
-            return res.status(400).json({message: 'User Already reagistered'});
+        if (isDuplicated) {
+            return res.status(400).json({ message: 'User Already registered' });
         }
 
-        const hasPassword = await hashPassword(password);
+        const hashedPassword = await hashPassword(password);
         
         const newUser = await User.create({
             username,
             email,
-            password: hasPassword,
+            password: hashedPassword,
             isVerified: false
         });
 
@@ -32,23 +34,25 @@ export const register = async (req: Request ,res: Response): Promise<any> =>{
         const tempToken = await Token.create({
             token,
             tokenType: 'temp',
-            expriedAt: Date.now() + 10 * 3600 * 1000,
-            userID: newUser._id
-        })
+            expriedAt: Date.now() + 10 * 60 * 1000,
+            userId: newUser._id
+        });
+
         const otp = generateOTP();
 
-        await storeOTP(email,otp);
+        await storeOTP(email, otp);
 
         await sendOTPMail(email, otp, username);
 
-        res.cookie('temptoken', tempToken , {
+        return res.cookie('temptoken', token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: "strict",
-            maxAge: 10 * 60 * 60 * 1000
-        }).status(200).json({message: 'New user saved!'})
+            secure: process.env.NODE_ENV === 'production', 
+            sameSite: 'lax',  
+            maxAge: 10  * 60 * 1000 
+        }).status(200).json({ message: 'New user saved!' });
 
     } catch (error) {
-        return res.status(500).json({message: 'Internel Server Error'});
+        console.error(error);
+        return res.status(500).json({ message: 'Internal Server Error' });
     }
-}
+};

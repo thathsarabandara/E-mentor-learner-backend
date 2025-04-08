@@ -2,8 +2,8 @@ import crypto from 'crypto';
 import { findOtp } from '../redis/redis.util';
 
 export const generateOTP = () =>{
-    const otp = crypto.randomBytes(3).toString('hex');
-    return otp.toUpperCase()
+    const otp = Math.floor(100000 + Math.random() * 900000);
+    return otp.toString();
 }
 
 export const compareOTP = async(email:string, otp:string) =>{
