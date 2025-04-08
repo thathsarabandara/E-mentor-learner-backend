@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import Token from "models/auth/Token.model";
 import User from "models/auth/User.model";
 import { sendWelcomeMail } from "services/mail/Templates/auth/Welcome.template";
-import { comparePasswrod } from "utils/HashPasswrod/hash.util";
 import { compareOTP } from "utils/otp/Otp.util";
 import { generateToken } from "utils/Token/Token.util";
 
@@ -64,7 +63,7 @@ export const verifyOTP = async (req: Request, res: Response) =>{
             sameSite: "strict"
         })
 
-        return res.cookie('authlearnerToken', authtoken ,{
+        return res.cookie('authlearnertoken', authtoken ,{
             httpOnly: true,
             secure: process.env.NODE_ENV ==='production',
             sameSite: 'strict',
