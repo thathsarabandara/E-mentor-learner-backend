@@ -66,7 +66,7 @@ export const sendOTPMail = async (to: string, otp: string, username: string): Pr
     const mailOptions = {
       from: mailConfig.from,
       to,
-      'E-Mentor - OTP Service',
+      subject: 'E-Mentor - OTP Service',
       html,
     };
 

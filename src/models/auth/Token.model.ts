@@ -3,7 +3,7 @@ import mongoose, { Document, Schema } from "mongoose";
 export interface IToken extends Document {
     token: string;
     tokenType: "temp | auth",
-    expriedat: Date,
+    expriedAt: Date,
     userId: mongoose.Types.ObjectId,
 }
 
@@ -13,10 +13,11 @@ const TokenSchema = new Schema<IToken>({
         required: true
     },
     tokenType: { 
-        ype:String, 
+        type:String,
+        enum: ['temp', 'auth'], 
         required: true
     },
-    expriedat: { 
+    expriedAt: { 
         type:Date, 
         required: true,
         default: new Date(Date.now() + 2 * 3600 * 1000),
