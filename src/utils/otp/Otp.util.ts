@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-import { findOtp } from 'utils/redis/redis.util';
+import { findOtp } from '../redis/redis.util';
 
 export const generateOTP = () =>{
     const otp = crypto.randomBytes(3).toString('hex');

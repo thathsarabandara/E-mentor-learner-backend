@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import Token from "models/auth/Token.model";
-import User from "models/auth/User.model";
-import { sendWelcomeMail } from "services/mail/Templates/auth/Welcome.template";
-import { compareOTP } from "utils/otp/Otp.util";
-import { generateToken } from "utils/Token/Token.util";
+import Token from "../../models/auth/Token.model";
+import User from "../../models/auth/User.model";
+import { sendWelcomeMail } from "../../services/mail/Templates/auth/Welcome.template";
+import { compareOTP } from "../../utils/otp/Otp.util";
+import { generateToken } from "../../utils/Token/Token.util";
 
 export const verifyOTP = async (req: Request, res: Response) =>{
     try {

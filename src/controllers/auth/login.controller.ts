@@ -9,7 +9,8 @@ import { generateToken } from "utils/Token/Token.util";
 export const login = async (req: Request, res: Response) =>{
     try {
         const {email, password}:LoginCredentials = req.body;
-        const ip = req.ip || req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+        const ip = req.headers['x-forwarded-for']?.toString().split(',')[0] || req.socket.remoteAddress || "127.0.0.1";
+        const location = await getGeoLocationFromIP(ip);
         const useragent = req.get('User-Agent') || 'Unknown' ;
 
         if(!email && !password){
@@ -33,7 +34,7 @@ export const login = async (req: Request, res: Response) =>{
             return res.status(400).json({message: 'Invalid Credentials'});
         }
 
-        await sendLoginAttemptMail(isValidUser.email, isValidUser.username, ip, useragent)
+        await sendLoginAttemptMail(isValidUser.email, isValidUser.username, ip as string, useragent, location)
 
         const authtoken = generateToken(isValidUser.email);
 

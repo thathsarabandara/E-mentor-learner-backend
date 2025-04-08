@@ -1,5 +1,5 @@
-import { mailConfig } from "config/Mail.Config";
-import { transporter } from "services/mail/Mail.Service";
+import { mailConfig } from "../../../../config/Mail.Config";
+import { transporter } from "../../../../services/mail/Mail.Service";
 
 export const sendLoginAttemptMail = async (
   to: string,
@@ -47,7 +47,7 @@ export const sendLoginAttemptMail = async (
           </tr>
           <tr>
             <td align="center" style="font-size: 13px; color: #888; padding-top: 24px;">
-              © ${year} E-Mentor LMS • Need help? <a href="mailto:support@ementor.io" style="color: #007bff;">Contact Support</a>
+              © ${year} E-Mentor LMS • Need help? <a href="mailto:support@ementor.io" style="color: #ff6b00;">Contact Support</a>
             </td>
           </tr>
         </table>
