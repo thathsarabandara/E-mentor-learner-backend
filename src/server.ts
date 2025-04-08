@@ -3,12 +3,17 @@ import connectDB from "./config/Database";
 import dotenv from "dotenv";
 import learnerRouter from "./routes/learner.route";
 import authRouter from "./routes/auth.route";
+import { corsOption } from "./middlewares/cors/cors.middleware";
+import cors from 'cors';
+import helmet from "helmet";
 
 const app = express();
 dotenv.config();
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(helmet());
+app.use(cors(corsOption));
 
 app.use('/auth', authRouter);
 app.use('/learner', learnerRouter);
