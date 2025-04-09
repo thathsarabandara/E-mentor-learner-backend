@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import PassResetToken from 'models/auth/PassRestToken';
 import User from 'models/auth/User.model';
 import { generateToken } from 'utils/Token/Token.util';
 
@@ -19,31 +20,15 @@ export const passwordResetRequest = async (req: Request, res: Response): Promise
       return res.status(404).json({ message: 'User not found or not verified' });
     }
 
-    // Generate a secure random token
     const token = generateToken(user.email)
 
-    
-
-    // Store the token in DB (or Redis)
-    const resetToken = new PasswordResetToken({
-      userId: user._id,
+    const resetToken = await PassResetToken.create({
       token,
-      expiresAt,
+      userId: user._id,
     });
-    await resetToken.save();
 
-    // Send reset email
     const resetLink = `${process.env.FRONTEND_URL}/reset-password?token=${token}`;
-    await sendEmail({
-      to: user.email,
-      subject: 'Password Reset Request',
-      html: `
-        <p>Hello ${user.name},</p>
-        <p>You requested a password reset. Click the link below to reset your password:</p>
-        <a href="${resetLink}">Reset Password</a>
-        <p>This link will expire in 15 minutes.</p>
-      `,
-    });
+    
 
     return res.status(200).json({ message: 'Password reset link sent to your email' });
   } catch (error) {

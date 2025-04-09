@@ -14,6 +14,15 @@ export const PassResetTokenSchema = new Schema<IPassResetToken>({
     expiredAt:{
         type: Date,
         required: true,
-        default:
+        default: Date.now()+ 20 * 60 * 1000
+    },
+    userId:{
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
     }
 })
+
+const PassResetToken = mongoose.model("PassResetToken", PassResetTokenSchema);
+
+export default PassResetToken;
