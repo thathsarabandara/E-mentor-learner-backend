@@ -17,7 +17,7 @@ export const register = async (req: Request ,res: Response): Promise<any> =>{
         const isDuplicated = await User.findOne({ email, isVerfied: true });
 
         if (isDuplicated) {
-            return res.status(400).json({ message: 'User Already registered' });
+            return res.status(400).json({ error: 'User Already registered' });
         }
 
         const hashedPassword = await hashPassword(password);
