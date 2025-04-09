@@ -3,10 +3,12 @@ import { register }  from '../controllers/auth/register.controller';
 import { verifyOTP } from "../controllers/auth/verify.controller";
 import { resendOtp } from "../controllers/auth/otpResend.controller";
 import { passwordResetRequest, resetPassword, verifyResetToken } from "../controllers/auth/passReset.controller";
+import { login } from "../controllers/auth/login.controller";
 
 const authRouter = Router();
 
 authRouter.post('/register', register);
+authRouter.post('/login', login);
 authRouter.post('/verifyotp', verifyOTP);
 authRouter.post('/resetrequest', passwordResetRequest);
 authRouter.post('/resetpassword', resetPassword);
