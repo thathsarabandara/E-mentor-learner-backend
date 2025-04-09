@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
-import Token from "models/auth/Token.model";
-import User from "models/auth/User.model";
-import { sendLoginAttemptMail } from "services/mail/Templates/auth/LoginAttempt.template";
-import { LoginCredentials } from "types/auth/auth";
-import { comparePasswrod } from "utils/HashPasswrod/hash.util";
-import { generateToken } from "utils/Token/Token.util";
+import Token from "../../models/auth/Token.model";
+import User from "../../models/auth/User.model";
+import { getGeoLocationFromIP } from "../../services/locationFinder/GeoLoacation.service";
+import { sendLoginAttemptMail } from "../../services/mail/Templates/auth/LoginAttempt.template";
+import { LoginCredentials } from "../../types/auth/auth";
+import { comparePasswrod } from "../../utils/HashPasswrod/hash.util";
+import { generateToken } from "../../utils/Token/Token.util";
 
 export const login = async (req: Request, res: Response) =>{
     try {

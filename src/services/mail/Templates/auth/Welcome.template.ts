@@ -21,7 +21,7 @@ export const sendWelcomeMail = async(to: string, username: string): Promise<void
                     
                     <!-- Header -->
                     <tr>
-                        <td align="center" bgcolor="#28a745" style="padding: 24px;">
+                        <td align="center" bgcolor="#ff6b00" style="padding: 24px;">
                         <h1 style="color: #ffffff; margin: 0; font-size: 24px;">🎉 Welcome to E-Mentor LMS!</h1>
                         </td>
                     </tr>
@@ -49,7 +49,7 @@ export const sendWelcomeMail = async(to: string, username: string): Promise<void
                     <tr>
                         <td align="center" bgcolor="#fafafa" style="padding: 16px; font-size: 13px; color: #888888;">
                         © ${year} E-Mentor LMS. All rights reserved.<br>
-                        Need help? <a href="mailto:support@ementor.io" style="color: #28a745; text-decoration: none;">Contact Support</a>
+                        Need help? <a href="mailto:support@ementor.io" style="color: #ff6b00; text-decoration: none;">Contact Support</a>
                         </td>
                     </tr>
 
