@@ -10,13 +10,9 @@ import { generateToken } from "../../utils/Token/Token.util";
 export const login = async (req: Request, res: Response): Promise<any> =>{
     try {
         const {email, password}:LoginCredentials = req.body;
-        console.log(email, password);
-        const ip = req.headers['x-forwarded-for']?.toString().split(',')[0]  || "127.0.0.1";
-        console.log(ip);
+        const ip = req.headers['x-forwarded-for']?.toString().split(',')[0] || req.socket.remoteAddress || "127.0.0.1";
         const location = await getGeoLocationFromIP(ip);
-        console.log(location);
         const useragent = req.get('User-Agent') || 'Unknown' ;
-        console.log(useragent);
 
         if(!email && !password){
             return res.status(400).json({message: 'Email and Password not found!'})
@@ -26,7 +22,7 @@ export const login = async (req: Request, res: Response): Promise<any> =>{
             email,
             isVerfied: true
         })
-        console.log(isValidUser);
+
         if(!isValidUser){
             return res.status(400).json({message: 'Invalid Credentials'})
         }
