@@ -31,13 +31,12 @@ export const auth = (role: string) => {
         _id: isValidToken.userId,
         isVerfied: 'true'
       });
-      
+
       if (!user) {
         return res.status(404).json({ message: "User not found or not verified" });
       }
 
       const group = await Group.findOne({ name: role });
-      console.log(group)
 
       if (!group) {
         return res.status(400).json({ message: "Invalid role/group" });
