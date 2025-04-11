@@ -8,6 +8,8 @@ import { sendOTPMail } from "../../services/mail/Templates/auth/Otp.template";
 import { generateToken } from "../../utils/Token/Token.util";
 import Token from "../../models/auth/Token.model";
 import dotenv from 'dotenv'
+import Group from "../../models/auth/Group.model";
+import UserGroup from "../../models/auth/UserGroup.model";
 dotenv.config();
 
 export const register = async (req: Request ,res: Response): Promise<any> =>{
@@ -28,6 +30,15 @@ export const register = async (req: Request ,res: Response): Promise<any> =>{
             password: hashedPassword,
             isVerified: false
         });
+
+        const group = await Group.findOne({
+            name: 'Learner',
+        })
+
+        await UserGroup.create({
+            groupID: group?._id,
+            userID: newUser._id,
+        })
 
         const token = generateToken(email);
 

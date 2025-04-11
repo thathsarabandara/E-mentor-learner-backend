@@ -6,8 +6,15 @@ export interface IGroup extends Document{
 }
 
 const GroupSchema = new Schema<IGroup>({
-    name: {type: String, required: true},
-    description: {type: String, required: true},
+    name: {
+        type: String,
+        enum: ['Learner' , 'Teacher' , 'Admin'],
+        required: true
+    },
+    description: {
+        type: String, 
+        required: true
+    },
 },
     {timestamps: true}
 )

@@ -8,6 +8,8 @@ import cors from 'cors';
 import helmet from "helmet";
 import { connectRedis } from "./config/redis.config";
 import cookieParser from 'cookie-parser';
+import compression from 'compression';
+import { limiter } from "./middlewares/ratelimiter/rateLimitter.middleware";
 
 const app = express();
 dotenv.config();
@@ -17,6 +19,9 @@ app.use(express.urlencoded({extended: true}));
 app.use(helmet());
 app.use(cors(corsOption));
 app.use(cookieParser());
+app.use(express.static('./src/uploads'))
+app.use(compression());
+app.use(limiter);
 
 app.use('/auth', authRouter);
 app.use('/learner', learnerRouter);
