@@ -13,27 +13,21 @@ export interface ILearner extends Document{
 export const LearnerSchema = new Schema<ILearner>({
     firstName:{
         type:String,
-        required: true,
     },
     lastName:{
         type:String,
-        required: true,
     },
     dateOfBirth:{
         type:Date,
-        required: true,
     },
     address:{
         type:String,
-        required: true,
     },
     phoneNumber:{
         type:String,
-        required: true,
     },
     proffesion:{
         type:String,
-        required: true,
     },
     userId:{
         type: Schema.Types.ObjectId,

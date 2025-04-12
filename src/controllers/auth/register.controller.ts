@@ -10,6 +10,7 @@ import Token from "../../models/auth/Token.model";
 import dotenv from 'dotenv'
 import Group from "../../models/auth/Group.model";
 import UserGroup from "../../models/auth/UserGroup.model";
+import Learner from "../../models/learner/Learner.model";
 dotenv.config();
 
 export const register = async (req: Request ,res: Response): Promise<any> =>{
@@ -30,6 +31,10 @@ export const register = async (req: Request ,res: Response): Promise<any> =>{
             password: hashedPassword,
             isVerified: false
         });
+
+        const learner = await Learner.create({
+            userId: newUser._id
+        })
 
         const group = await Group.findOne({
             name: 'Learner',
