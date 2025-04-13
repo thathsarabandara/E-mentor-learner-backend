@@ -21,7 +21,9 @@ export const PassResetTokenSchema = new Schema<IPassResetToken>({
         ref: 'User',
         required: true,
     }
-})
+},
+    {timestamps: true}
+)
 
 const PassResetToken = mongoose.model("PassResetToken", PassResetTokenSchema);
 

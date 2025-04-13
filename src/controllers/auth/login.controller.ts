@@ -7,7 +7,7 @@ import { LoginCredentials } from "../../types/auth/auth";
 import { comparePasswrod } from "../../utils/HashPasswrod/hash.util";
 import { generateToken } from "../../utils/Token/Token.util";
 
-export const login = async (req: Request, res: Response) =>{
+export const login = async (req: Request, res: Response): Promise<any> =>{
     try {
         const {email, password}:LoginCredentials = req.body;
         const ip = req.headers['x-forwarded-for']?.toString().split(',')[0] || req.socket.remoteAddress || "127.0.0.1";

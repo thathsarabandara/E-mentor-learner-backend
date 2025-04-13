@@ -99,7 +99,7 @@ export const resetPassword = async (req:Request, res:Response):Promise<any> => {
 
         const hashedPassword = await hashPassword(password);
 
-        await User.findByIdAndUpdate(storedToken.userId,{password: password})
+        await User.findByIdAndUpdate(storedToken.userId,{password: hashedPassword})
 
         res.status(200).json({ message: 'Password has been reset successfully.' });
 
