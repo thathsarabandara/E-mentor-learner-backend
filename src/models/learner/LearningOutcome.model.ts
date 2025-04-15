@@ -1,0 +1,4 @@
+interface LearningOutcome {
+    outcome: String,
+    
+}
