@@ -1,5 +1,5 @@
 interface LearningOutcome {
     outcome: String,
 
-    
+     
 } 
