@@ -39,7 +39,6 @@ export interface IInstructor extends Document {
   ratings: number;
   reviews: mongoose.Types.ObjectId[];
   isVerified: boolean;
-  courses: mongoose.Types.ObjectId[];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -92,7 +91,6 @@ const InstructorSchema = new Schema<IInstructor>(
     ratings: { type: Number, default: 0 },
     reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
     isVerified: { type: Boolean, default: false },
-    courses: [{ type: Schema.Types.ObjectId, ref: "Course" }],
     userId: {
       type: Schema.Types.ObjectId,
       ref: "User",
